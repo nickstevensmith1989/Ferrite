@@ -23,13 +23,12 @@ jobs:
       - run:
           name: Package IPA
           command: |
-            mkdir payload
+            mkdir Payload
             cp -r build/Ferrite.xcarchive/Products/Applications/Ferrite.app Payload
-            zip -r Ferrite-iOS_nightly-$CIRCLE_SHA1.ipa Payload
+            zip -r Ferrite.ipa Payload
+            zip Ferrite-iOS_nightly-$(echo ${CIRCLE_SHA1:0:7}).zip Ferrite.ipa
             mkdir artifacts
-            mv Ferrite-iOS_nightly-$CIRCLE_SHA1.ipa artifacts
-            ls artifacts
-
+            mv Ferrite-iOS_nightly-$(echo ${CIRCLE_SHA1:0:7}).zip artifacts
       - store_artifacts:
           path: artifacts
 
